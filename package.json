@@ -1,12 +1,22 @@
 {
   "name": "apollo-link-response-resolver",
   "version": "0.0.1",
-  "description": "apollo-link",
-  "main": "index.js",
+  "description": "Use resolvers to format incoming data with Apollo Link",
+  "main": "./lib/bundle.umd.js",
+  "module": "./lib/index.js",
+  "jsnext:main": "./lib/index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/lionize/apollo-link-response-resolver"
+  },
+  "bugs": {
+    "url": "https://github.com/lionize/apollo-link-response-resolver"
+  },
+  "homepage": "https://github.com/lionize/apollo-link-response-resolve#readme",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "keywords": ["apollo", "apollo-link", "graphql"],
-  "author": "Mark A. Chandler, II",
+  "author": "Mark Chandler",
   "license": "MIT"
 }
