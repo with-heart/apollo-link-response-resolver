@@ -1,7 +1,7 @@
 import { ApolloLink, Observable } from 'apollo-link'
 import { mapFields, map } from './utils'
 
-export const automap = maps => {
+export const responseResolver = maps => {
   return new ApolloLink((operation, forward) => {
     return new Observable(observer => {
       let sub
