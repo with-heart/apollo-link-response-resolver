@@ -2,9 +2,8 @@
   "name": "apollo-link-response-resolver",
   "version": "0.0.1",
   "description": "Use resolvers to format incoming data with Apollo Link",
-  "main": "./lib/bundle.umd.js",
-  "module": "./lib/index.js",
-  "jsnext:main": "./lib/index.js",
+  "main": "dist/index.js",
+  "module": "dist/index.esm.js",
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lionize/apollo-link-response-resolver"
@@ -14,9 +13,26 @@
   },
   "homepage": "https://github.com/lionize/apollo-link-response-resolve#readme",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "build": "rollup -c",
+    "clean": "rimraf dist/* && rimraf coverage/*",
+    "prebuild": "npm run clean",
+    "prepublishOnly": "npm run clean && npm run build",
+    "test": "jest",
+    "test:watch": "jest --watch"
   },
   "keywords": ["apollo", "apollo-link", "graphql"],
   "author": "Mark Chandler",
-  "license": "MIT"
+  "license": "MIT",
+  "devDependencies": {
+    "babel-preset-env": "^1.6.1",
+    "jest": "^22.0.4",
+    "rimraf": "^2.6.2",
+    "rollup": "^0.53.2"
+  },
+  "dependencies": {
+    "apollo-link": "^1.0.7"
+  },
+  "babel": {
+    "presets": ["env"]
+  }
 }
