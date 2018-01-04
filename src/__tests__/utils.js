@@ -177,4 +177,44 @@ describe('map', () => {
 
     expect(map(maps, data)).toEqual(expected)
   })
+
+  test('handles null being passed as data', () => {
+    const maps = {
+      Account: {
+        fullname: name => name.toUpperCase(),
+      },
+    }
+    const data = null
+
+    expect(map(maps, data)).toEqual(null)
+  })
+
+  test('handles nested array with null value', () => {
+    const maps = {
+      Account: {
+        fullname: name => name.toUpperCase(),
+      },
+    }
+    const data = {
+      items: [null, { fullname: 'Mark', __typename: 'Account' }],
+    }
+    const expected = {
+      items: [null, { fullname: 'MARK', __typename: 'Account' }],
+    }
+
+    expect(map(maps, data)).toEqual(expected)
+  })
+
+  test('handles nested object key with null value', () => {
+    const maps = {
+      Account: {
+        fullname: name => name.toUpperCase(),
+      },
+    }
+    const data = {
+      items: null,
+    }
+
+    expect(map(maps, data)).toEqual(data)
+  })
 })

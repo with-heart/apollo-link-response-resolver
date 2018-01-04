@@ -18,7 +18,10 @@ export const map = (maps, data) => {
   const mapObject = obj => {
     return Object.keys(obj).reduce((acc, key) => {
       const cur = obj[key]
-      if (isArray(cur)) {
+
+      if (!cur) {
+        acc[key] = cur
+      } else if (isArray(cur)) {
         acc[key] = mapArray(cur)
       } else if (isObject(cur)) {
         if (isMappedType(cur)) {
@@ -35,6 +38,10 @@ export const map = (maps, data) => {
 
   const mapArray = array => {
     return array.map(o => {
+      if (!o) {
+        return o
+      }
+
       if (isArray(o)) {
         return mapArray(o)
       }
@@ -48,6 +55,10 @@ export const map = (maps, data) => {
 
       return o
     })
+  }
+
+  if (!data) {
+    return data
   }
 
   if (isObject(data)) {
