@@ -25,7 +25,7 @@ const resolvers = {
   },
 }
 
-const responseResolverLink = withResponseResolver({ resolvers })
+const responseResolverLink = withResponseResolver(resolvers)
 ```
 
 To hook up your response resolvers to Apollo Client, add your link to the other links in your Apollo Link chain. You want to make sure that your link comes before `HttpLink`.
