@@ -1,5 +1,5 @@
-import { ApolloLink, Observable } from 'apollo-link'
-import { mapFields, map } from './utils'
+import {ApolloLink, Observable} from 'apollo-link'
+import map from './map'
 
 export const withResponseResolver = maps => {
   return new ApolloLink((operation, forward) => {

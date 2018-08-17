@@ -1,36 +1,15 @@
-import { map, mapFields } from '../utils'
-
-describe('mapFields', () => {
-  test('maps fields for a type', () => {
-    const map = {
-      fullname: name => name.toUpperCase(),
-      amount: amount => amount + 1,
-    }
-    const data = {
-      fullname: 'Homer Simpson',
-      amount: 10,
-    }
-    const expected = {
-      fullname: 'HOMER SIMPSON',
-      amount: 11,
-    }
-    expect(mapFields(map, data)).toEqual(expected)
-  })
-
-  test('passes through fields with no map function', () => {
-    const map = {}
-    const data = {
-      fullname: 'Homer Simpson',
-    }
-    expect(mapFields(map, data)).toEqual(data)
-  })
-})
+import map from './map'
 
 describe('map', () => {
-  test('maps multiple typenames', () => {
+  it('returns data if no maps or no data', () => {
+    expect(map({}, null)).toEqual(null)
+    expect(map(null, {})).toEqual({})
+  })
+
+  it('maps multiple typenames', () => {
     const maps = {
-      Account: { fullname: name => name.toUpperCase() },
-      Post: { title: title => title.toLowerCase() },
+      Account: {fullname: name => name.toUpperCase()},
+      Post: {title: title => title.toLowerCase()},
     }
     const data = {
       accounts: [
@@ -64,9 +43,9 @@ describe('map', () => {
     expect(map(maps, data)).toEqual(expected)
   })
 
-  test('maps a shallow nested object', () => {
+  it('maps a shallow nested object', () => {
     const maps = {
-      Account: { fullname: name => name.toUpperCase() },
+      Account: {fullname: name => name.toUpperCase()},
     }
     const data = {
       allAccounts: {
@@ -84,9 +63,9 @@ describe('map', () => {
     expect(map(maps, data)).toEqual(expected)
   })
 
-  test('maps a deeply nested object', () => {
+  it('maps a deeply nested object', () => {
     const maps = {
-      Account: { fullname: name => name.toUpperCase() },
+      Account: {fullname: name => name.toUpperCase()},
     }
     const data = {
       someAccounts: {
@@ -112,14 +91,22 @@ describe('map', () => {
     expect(map(maps, data)).toEqual(expected)
   })
 
-  test('maps nested objects and arrays', () => {
+  it('maps nested objects and arrays', () => {
     const maps = {
-      Account: { fullname: name => name.toUpperCase() },
+      Account: {
+        fullname: name => name.toUpperCase(),
+        tags: tags => tags.map(t => t.toUpperCase()),
+      },
     }
     const data = {
       someAccounts: {
         mainAccount: {
           fullname: 'Rob',
+          secondaryAccount: {
+            fullname: 'John',
+            __typename: 'Account',
+          },
+          tags: ['a', 'b', 'c'],
           __typename: 'Account',
         },
         otherAccounts: [
@@ -134,6 +121,11 @@ describe('map', () => {
       someAccounts: {
         mainAccount: {
           fullname: 'ROB',
+          secondaryAccount: {
+            fullname: 'JOHN',
+            __typename: 'Account',
+          },
+          tags: ['A', 'B', 'C'],
           __typename: 'Account',
         },
         otherAccounts: [
@@ -148,7 +140,7 @@ describe('map', () => {
     expect(map(maps, data)).toEqual(expected)
   })
 
-  test("leaves all data that isn't mapped", () => {
+  it("leaves all data that isn't mapped", () => {
     const maps = {
       Account: {
         fullname: name => name.toUpperCase(),
@@ -178,43 +170,57 @@ describe('map', () => {
     expect(map(maps, data)).toEqual(expected)
   })
 
-  test('handles null being passed as data', () => {
-    const maps = {
-      Account: {
-        fullname: name => name.toUpperCase(),
-      },
-    }
-    const data = null
-
-    expect(map(maps, data)).toEqual(null)
-  })
-
-  test('handles nested array with null value', () => {
+  it('handles nested array with null value', () => {
     const maps = {
       Account: {
         fullname: name => name.toUpperCase(),
       },
     }
     const data = {
-      items: [null, { fullname: 'Mark', __typename: 'Account' }],
+      items: [null, {fullname: 'Mark', __typename: 'Account'}],
     }
     const expected = {
-      items: [null, { fullname: 'MARK', __typename: 'Account' }],
+      items: [null, {fullname: 'MARK', __typename: 'Account'}],
     }
 
     expect(map(maps, data)).toEqual(expected)
   })
 
-  test('handles nested object key with null value', () => {
+  it('handles nested types', () => {
     const maps = {
-      Account: {
-        fullname: name => name.toUpperCase(),
+      User: {
+        firstname: name => name.toUpperCase(),
+        lastname: name => name.toUpperCase(),
+      },
+      Company: {
+        name: name => name.toUpperCase(),
       },
     }
     const data = {
-      items: null,
+      currentUser: {
+        firstname: 'David',
+        lastname: 'Felix',
+        email: 'dfelix@test.com',
+        company: {
+          name: 'myCompany',
+          __typename: 'Company',
+        },
+        __typename: 'User',
+      },
+    }
+    const expected = {
+      currentUser: {
+        firstname: 'DAVID',
+        lastname: 'FELIX',
+        email: 'dfelix@test.com',
+        company: {
+          name: 'MYCOMPANY',
+          __typename: 'Company',
+        },
+        __typename: 'User',
+      },
     }
 
-    expect(map(maps, data)).toEqual(data)
+    expect(map(maps, data)).toEqual(expected)
   })
 })
