@@ -1,6 +1,6 @@
 {
   "name": "apollo-link-response-resolver",
-  "version": "0.0.2",
+  "version": "0.1.0",
   "description": "Use resolvers to format incoming data with Apollo Link",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
@@ -20,11 +20,7 @@
     "test": "jest",
     "test:watch": "jest --watch"
   },
-  "keywords": [
-    "apollo",
-    "apollo-link",
-    "graphql"
-  ],
+  "keywords": ["apollo", "apollo-link", "graphql"],
   "author": "Mark Chandler",
   "license": "MIT",
   "devDependencies": {
@@ -37,8 +33,6 @@
     "apollo-link": "^1.0.7"
   },
   "babel": {
-    "presets": [
-      "env"
-    ]
+    "presets": ["env"]
   }
 }
