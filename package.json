@@ -6,12 +6,12 @@
   "module": "dist/index.esm.js",
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lionize/apollo-link-response-resolver"
+    "url": "git+https://github.com/with-heart/apollo-link-response-resolver"
   },
   "bugs": {
-    "url": "https://github.com/lionize/apollo-link-response-resolver"
+    "url": "https://github.com/with-heart/apollo-link-response-resolver"
   },
-  "homepage": "https://github.com/lionize/apollo-link-response-resolve#readme",
+  "homepage": "https://github.com/with-heart/apollo-link-response-resolve#readme",
   "scripts": {
     "build": "rollup -c",
     "clean": "rimraf dist/* && rimraf coverage/*",
