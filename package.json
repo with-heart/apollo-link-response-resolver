@@ -4,6 +4,9 @@
   "description": "Use resolvers to format incoming data with Apollo Link",
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
+  "files": [
+    "dist"
+  ],
   "repository": {
     "type": "git",
     "url": "git+https://github.com/lionize/apollo-link-response-resolver"
