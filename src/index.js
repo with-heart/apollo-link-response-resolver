@@ -14,9 +14,7 @@ export const withResponseResolver = maps => {
 
             observer.next(result)
           },
-          error: error => {
-            console.error(error)
-          },
+          error: observer.error.bind(observer),
           complete: observer.complete.bind(observer),
         })
       } catch (e) {
