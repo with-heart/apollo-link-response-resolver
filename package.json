@@ -31,17 +31,19 @@
   "author": "Mark Chandler",
   "license": "MIT",
   "devDependencies": {
-    "babel-preset-env": "^1.6.1",
-    "jest": "^22.0.4",
-    "rimraf": "^2.6.2",
-    "rollup": "^0.53.2"
+    "@babel/core": "^7.6.0",
+    "@babel/preset-env": "^7.6.0",
+    "babel-jest": "^24.9.0",
+    "jest": "^24.9.0",
+    "rimraf": "^3.0.0",
+    "rollup": "^1.21.3"
   },
   "dependencies": {
-    "apollo-link": "^1.0.7"
+    "apollo-link": "^1.2.13"
   },
   "babel": {
     "presets": [
-      "env"
+      "@babel/preset-env"
     ]
   }
 }
