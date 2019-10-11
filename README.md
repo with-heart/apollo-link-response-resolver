@@ -1,3 +1,9 @@
+# ❗️ `apollo-link-response-resolver` is unmaintained. ❗️
+
+I'm no longer of the opinion that this library is useful. The GraphQL layer is a UI concern and queries should be purpose-specific and driven by the UI's needs, so the data it returns should be in the format the UI expects. There should be no need for `apollo-link-response-resolver.
+
+With that said, my opinion isn't necessarily true for everyone, so if you're is interested in maintaining `apollo-link-response-resolver`, please [reply to this issue](https://github.com/with-heart/apollo-link-response-resolver/issues/18)!
+
 # [apollo-link-response-resolver](https://github.com/lionize/apollo-link-response-resolver)
 
 ### Automatically format incoming GraphQL query data with Apollo Client
